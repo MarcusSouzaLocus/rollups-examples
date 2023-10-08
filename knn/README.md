@@ -1,12 +1,59 @@
-# k-NN DApp
+<div align="center">
+    <h1>k-NN Classifier</h1>
+    <i>A Decentralized k-NN Classifier Solution</i>
+</div>
+<div align="center">
+  This repository contains a simple machine-learning classification algorithm within a Cartesi Rollups DApp.
+</div>
 
-This example implements a simple Machine Learning classification algorithm within a Cartesi Rollups DApp.
+<div align="center">
+  
+  <a href="">[![Static Badge](https://img.shields.io/badge/cartesi--rollups-1.0.0-5bd1d7)](https://docs.cartesi.io/cartesi-rollups/)</a>
+  <a href="">[![Static Badge](https://img.shields.io/badge/python-3.11-yellow)](https://www.python.org/)</a>
+</div>
+
+
+# Table of contents
+
+- [Intro](#intro)
+  - [Key Features](#key-features)
+- [k-NN Workflow Explanation](#k-nn-workflow-explanation)
+- [Requirements](#requirements)
+- [Interacting with the application](#interacting-with-the-application)
+  - [Frontend-Console](#frontend-console)
+  - [Using the Frontend-knn](#using-the-frontend-knn)
+
+# Intro
 
 In this DApp, we use the [k-Nearest Neighbor algorithm](https://en.wikipedia.org/wiki/K-nearest_neighbors_algorithm) to predict the class of a given input based on a previously known dataset of samples.
 
 We use the classic [Iris flower dataset](https://en.wikipedia.org/wiki/Iris_flower_data_set), which contains 3 classes of 50 instances each, where each class refers to a species of the [Iris flower](<https://en.wikipedia.org/wiki/Iris_(plant)>).
-One class is linearly separable from the other two, however the latter are NOT linearly separable from each other.
+One class is linearly separable from the other two, however, the latter are NOT linearly separable.
 The actual data used in this example is available [here](https://archive.ics.uci.edu/ml/datasets/iris).
+
+
+The practical goal of this application is to show the community one of the benefits of using the Cartesi rollups technology: we can bring web2 technologies to life in blockchain, such as machine learning.
+
+When starting the application while building the machine, the k-NN classification algorithm is evaluated on the dataset using cross-validation, showing the expected accuracy of the classifier.
+
+## Key Features
+
+- Machine learning: Utilizes pure python to implement an k-NN algorithm
+- Cartesi Rollups: Leverages the Cartesi Rollups infrastructure to ensure the DApp is scalable, decentralized, and secure.
+
+
+# k-NN Workflow Explanation
+
+
+This example employs the k-NN approach to predict the class of a flower given its petal sizes. Those sizes are sent through a transaction payload, and this payload is processed by the dapp backend. The result is brought back to the caller via a notice by the cartesi rollups. The diagram below illustrates the workflow with every technology utilized in this experiment.
+
+![image](https://github.com/MarcusSouzaLocus/rollups-examples/assets/101931038/cc8d3351-3be6-4618-bed5-2e5c7f6e81b5)
+
+# Requirements
+[(Back to top)](#table-of-contents)
+
+Please refer to the [rollups-examples requirements](https://github.com/cartesi/rollups-examples/tree/main/README.md#requirements).
+
 
 When starting the application while building the machine, the k-NN classification algorithm is evaluated on the dataset using cross-validation, showing the expected accuracy of the classifier.
 
@@ -34,8 +81,11 @@ Where `sl` represents the sepal length, `sw` is the sepal width, `pl` is the pet
 
 ## Interacting with the application
 
-We can use the [frontend-console](../frontend-console) application to interact with the DApp.
-Ensure that the [application has already been built](../frontend-console/README.md#building) before using it.
+There are two main ways to interact with the application. One is the [frontend console](../frontend-console) and another is the [frontend-knn](../frontend-knn). Here is a detailed explanation of how to do both.
+
+## Frontend-Console 
+
+[(Back to top)](#table-of-contents)
 
 First, go to a separate terminal window and switch to the `frontend-console` directory:
 
@@ -56,6 +106,34 @@ yarn start notice list
 ```
 
 The payload of the notice should be `"Iris-setosa"`, which corresponds to the Iris flower species class, as predicted by the k-NN algorithm.
+
+## Using the Frontend-kNN
+
+
+[(Back to top)](#table-of-contents)
+
+We can use the [frontend-knn](../frontend-knn) application to interact with the DApp.
+Ensure that the [application has already been built](../frontend-knn/README.md#building) before using it.
+
+First, you will need to import a local wallet to the metamask, since the frontend console uses it to send the transactions to the backend. With that said, you will need to connect to the local blockchain. To do that, do the following:
+
+You can find a private key when you run the up command explained above. In one of the logs, you will see some public wallets and their private keys. Something similar to below:
+
+![image](https://github.com/souzavinny/rollups-examples/assets/4421825/9784c7c3-c207-4fac-b5c7-0d7282e14b26)
+
+With this private key, and the localhost blockchain running, import the wallet into the metamask. You can also follow this [guide](https://medium.com/publicaio/how-import-a-wallet-to-your-metamask-account-dcaba25e558d#:~:text=After%20creating%20an%20account%2C%20click,key%20string%20and%20click%20Import.).
+
+The knn frontend has a Manage Wallet option in the up-right sector of the page. Click there to connect your wallet to the knn frontend. You can also bring the localhost blockchain through there. See below:
+
+![image](https://github.com/souzavinny/rollups-examples/assets/4421825/f55222ed-e688-4f80-b0d8-2c19bd4031a1)
+
+If everything goes as expected, you will see the funds of the localhost blockchain in the wallet as follows:
+
+![image](https://github.com/souzavinny/rollups-examples/assets/4421825/25349fad-8dc0-4a1d-97f4-f673aeb3e58c)
+
+Now you can send the petals information to the backend through transactions. See the following video below that showcases the frontend:
+
+[Iris_Classifier.webm](https://github.com/MarcusSouzaLocus/rollups-examples/assets/101931038/59816c63-f8e1-487c-b781-f9225351984a)
 
 ## Running the environment in host mode
 
@@ -94,3 +172,7 @@ INFO:__main__:Sending finish
 ```
 
 After that, you can interact with the application normally [as explained above](#interacting-with-the-application).
+
+# Deploying to a testnet
+
+Please refer to the [rollups-examples deploying](https://github.com/cartesi/rollups-examples/tree/main/README.md#deploying).
