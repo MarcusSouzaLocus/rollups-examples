@@ -76,7 +76,7 @@ When developing an application, it is often important to easily test and debug i
 In order to start the back-end, run the following commands in a dedicated terminal:
 
 ```shell
-cd m2cgen
+cd airquality
 python3 -m venv .venv
 . .venv/bin/activate
 pip install -r requirements.txt
@@ -105,9 +105,7 @@ After that, you can interact with the application normally [as explained above](
 
 This DApp was implemented in a rather generic way and, as such, it is possible to easily change the target dataset as well as the predictor algorithm.
 
-To change those, open the file `m2cgen/model/build_model.py` and change the following variables defined at the beginning of the script:
+To change those, open the file `airquality/model/build_model.py` and change the following variables defined at the beginning of the script:
 
-- `model`: defines the scikit-learn predictor algorithm to use. While it currently uses `sklearn.linear_model.LogisticRegression`, many [other possibilities](https://scikit-learn.org/stable/modules/classes.html) are available, from several types of linear regressions to solutions such as support vector machines (SVMs).
+- `model`: defines the scikit-learn predictor algorithm to use. While it currently uses `sklearn.linear_model.LinearRegression`, many [other possibilities](https://scikit-learn.org/stable/modules/classes.html) are available, from several types of linear regressions to solutions such as support vector machines (SVMs).
 - `train_csv`: a URL or file path to a CSV file containing the dataset. It should contain a first row with the feature names, followed by the data.
-- `include`: an optional list indicating a subset of the dataset's features to be used in the prediction model.
-- `dependent_var`: the feature to be predicted, such as the entry's classification
