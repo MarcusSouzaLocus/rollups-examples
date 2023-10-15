@@ -37,10 +37,16 @@ def str2hex(str):
 
 
 def calculate_aqi(concentrations):
+    """
+       Calculates a simple Air Quality index by calculating the mean of sum of the values predicted for the core pollutants
+    """
     aqi = sum(concentrations) / len(concentrations)
     return aqi
 
 def categorize_aqi(aqi):
+    """
+           Categorizes the AQI Calculated in the Standard Air quality ranges from good to hazardous
+    """
     if aqi <= 50:
         return 'Good'
     elif aqi <= 100:
@@ -57,7 +63,7 @@ def categorize_aqi(aqi):
 
 def format(input):
     """
-    Transforms a given input so that it is in the format expected by the m2cgen model
+    Transforms a given input so that it is in the format expected by the model
     """
     output = list(input.values())
     return output
