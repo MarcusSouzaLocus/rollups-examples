@@ -1,26 +1,47 @@
-# m2cgen DApp
+<div align="center">
+    <h1>Descentralized Air Quality Classifier</h1>
+    <i>A Decentralized Air Quality Predictor using sensor values for a list of polluants</i>
+</div>
+<div align="center">
+  This repository contains an Machine Learning DApp developed using cartesi rollups.
+</div>
+
+<div align="center">
+  
+  <a href="">[![Static Badge](https://img.shields.io/badge/cartesi--rollups-1.0.0-5bd1d7)](https://docs.cartesi.io/cartesi-rollups/)</a>
+  <a href="">[![Static Badge](https://img.shields.io/badge/python-3.11-yellow)](https://www.python.org/)</a>
+</div>
 
 This example shows a simple way of leveraging some of the most widely used Machine Learning libraries available in Python.
 
-The DApp generates a [logistic regression](https://en.wikipedia.org/wiki/Logistic_regression) model using [scikit-learn](https://scikit-learn.org/), [NumPy](https://numpy.org/) and [pandas](https://pandas.pydata.org/), and then uses [m2cgen (Model to Code Generator)](https://github.com/BayesWitnesses/m2cgen) to transpile that model into native Python code with no dependencies.
+The DApp generates a [linear regression](https://en.wikipedia.org/wiki/Logistic_regression) model using [scikit-learn](https://scikit-learn.org/), [NumPy](https://numpy.org/) and [pandas](https://pandas.pydata.org/), and then uses [m2cgen (Model to Code Generator)](https://github.com/BayesWitnesses/m2cgen) to transpile that model into native Python code with no dependencies.
 This approach is inspired by [Davis David's Machine Learning tutorial](https://www.freecodecamp.org/news/transform-machine-learning-models-into-native-code-with-zero-dependencies/), and is useful for a Cartesi DApp because it removes the need of porting all those Machine Learning libraries to the Cartesi Machine's RISC-V architecture, making the development process easier and the final back-end code simpler to execute.
 
-The practical goal of this application is to predict a classification based on the [Titanic dataset](https://www.kaggle.com/competitions/titanic/data), which shows characteristics of people onboard the Titanic and whether that person survived the disaster or not.
-As such, users can submit inputs describing a person's features to find out if that person is likely to have survived.
+The practical goal of this application is to predict a classification based on the [Air Quality Dataset](https://www.kaggle.com/datasets/fedesoriano/air-quality-data-set/), which contains the responses of a gas multisensor device deployed on the field in an Italian city. Hourly responses averages are recorded along with gas concentrations references from a certified analyzer.
 
-The model currently takes into account only three characteristics of a person to predict their survival, even though other attributes are available in the dataset:
+The model currently takes into account several variables for predicting the AQI(Air quality index):
 
-1. Age
-2. Sex, which can be `male` or `female`
-3. Embarked, which corresponds to the port of embarkation and can be `C` (Cherbourg), `Q` (Queenstown), or `S` (Southampton)
+1. PT08.S1(CO): This represents the sensor response to Carbon Monoxide (CO) levels in the air.
+
+2. PT08.S2(NMHC): This represents the sensor response to Non-Methane Hydrocarbons (NMHC) in the air. For instance, the value 1046 is the sensor reading, which can be correlated to the actual concentration of NMHC in micrograms per cubic meter (µg/m³).
+
+3. PT08.S3(NOx): This represents the sensor response to Nitrogen Oxides (NOx) in the air. For instance, the value 1056 is the sensor reading, which can be correlated to the actual concentration of NOx in parts per billion (ppb).
+
+4. PT08.S4(NO2): This represents the sensor response to Nitrogen Dioxide (NO2) in the air. For instance , the value 1692 is the sensor reading, which can be correlated to the actual concentration of NO2 in micrograms per cubic meter (µg/m³).
+
+5. PT08.S5(O3): This represents the sensor response to Ozone (O3) in the air. For instance, the value 1268 is the sensor reading, which can be correlated to the actual concentration of O3 in micrograms per cubic meter (µg/m³).
+
+6. T: This represents the temperature in degrees Celsius. For instance, the value 21.6 is the measured temperature.
+
+7. RH: This represents the Relative Humidity in percentage. For instance, the value 13.6 is the measured relative humidity.
+
+8. AH: This represents the Absolute Humidity, which is the total water content in the air. For instance, the value 0.76 could be the absolute humidity in grams per cubic meter (g/m³).
 
 As such, inputs to the DApp should be given as a JSON string such as the following:
 
 ```json
-{ "Age": 37, "Sex": "male", "Embarked": "S" }
+{"PT08.S1(CO)": 1360, "PT08.S2(NMHC)": 1046, "PT08.S3(NOx)": 1056, "PT08.S4(NO2)": 1692, "PT08.S5(O3)": 1268, "T": 21.6, "RH": 13.6, "AH": 0.76}
 ```
-
-The predicted classification result will be given as `0` (did not survive) or `1` (did survive).
 
 ## Interacting with the application
 
@@ -36,7 +57,7 @@ cd frontend-console
 Then, send an input as follows:
 
 ```shell
-yarn start input send --payload '{"Age": 37, "Sex": "male", "Embarked": "S"}'
+yarn start input send --payload '{"PT08.S1(CO)": 1360, "PT08.S2(NMHC)": 1046, "PT08.S3(NOx)": 1056, "PT08.S4(NO2)": 1692, "PT08.S5(O3)": 1268, "T": 21.6, "RH": 13.6, "AH": 0.76}'
 ```
 
 In order to verify the notices generated by your inputs, run the command:
@@ -45,8 +66,8 @@ In order to verify the notices generated by your inputs, run the command:
 yarn start notice list
 ```
 
-The payload of the notice corresponds to whether the person survived (`"1"`) or not (`"0"`).
-In this case, it should be `"0"`.
+The payload of the notice corresponds one of the list of the standard range for AQI: (`"Good"`),(`"Moderate"`),(`"Bad for sensible groups"`),(`"Bad"`),(`"Very Bad"`) and (`"Dangerous"`).
+In this case, it should be `"Moderate"`.
 
 ## Running the environment in host mode
 
