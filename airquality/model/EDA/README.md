@@ -1338,7 +1338,6 @@ The goal is to predict continuous values (pollutant concentrations), which is in
 model = LinearRegression()
 model.fit(X_train, y_train)
 ```
-
 Based on pollutant predictions, we can calculate an air quality index (AQI) and categorize this AQI into different levels. Just for the sake of simplicity, we will just calculate the mean of all values predicted by our model.
 
 
