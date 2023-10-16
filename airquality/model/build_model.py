@@ -11,10 +11,23 @@
 # specific language governing permissions and limitations under the License.
 
 import pandas as pd
-import m2cgen as m2c 
+import m2cgen as m2c
 from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LinearRegression
-import re
+
+
+def remove_outliers(df, column_name):
+    """
+    Function for removing outliers from columns.
+    """
+    Q1 = df[column_name].quantile(0.25)
+    Q3 = df[column_name].quantile(0.75)
+    IQR = Q3 - Q1
+
+    lower_limit = Q1 - 1.5 * IQR
+    upper_limit = Q3 + 1.5 * IQR
+
+    return df[(df[column_name] >= lower_limit) & (df[column_name] <= upper_limit)]
 
 
 #
@@ -33,8 +46,8 @@ train_csv = "https://docs.google.com/spreadsheets/d/e/2PACX-1vS6__hHU1bGI7oczcrZ
 
 # - reads data into a pandas dataframe
 train_df = pd.read_csv(train_csv)
-train_df = train_df.replace(-200, pd.NA).dropna()
 
+# Converts data into numerical - Refer to EDA
 numerical_columns = [
     'CO(GT)', 'PT08.S1(CO)', 'NMHC(GT)', 'C6H6(GT)', 'PT08.S2(NMHC)',
     'NOx(GT)', 'PT08.S3(NOx)', 'NO2(GT)', 'PT08.S4(NO2)', 'PT08.S5(O3)',
@@ -44,20 +57,26 @@ numerical_columns = [
 for column in numerical_columns:
     train_df[column] = pd.to_numeric(train_df[column].astype(str).str.replace(',', '.'), errors='coerce')
 
+#Treats all NaN values and drops
+train_df.replace(-200, pd.NA, inplace=True)
 
-# Converter colunas de data e hora para datetime
-train_df['Datetime'] = pd.to_datetime(train_df['Date'] + ' ' + train_df['Time'], format='%d/%m/%Y %H.%M.%S', errors='coerce')
+# Refer EDA
+train_df = train_df.drop(columns=['Date', 'Time', 'NMHC(GT)'])
+train_df = train_df.dropna()
 
-# Agora você pode descartar as colunas originais de data e hora, se desejar
-train_df = train_df.drop(columns=['Date', 'Time'])
+data_cleaned = train_df.copy()
+for column in train_df:
+    data_cleaned = remove_outliers(data_cleaned, column)
 
-X = train_df.drop(['Datetime', 'CO(GT)', 'NMHC(GT)', 'C6H6(GT)', 'NOx(GT)', 'NO2(GT)'], axis=1)
-y = train_df[['CO(GT)','NOx(GT)', 'NO2(GT)']]
+test = data_cleaned.describe()
 
-# Dividir dados
+X = data_cleaned.drop(['CO(GT)', 'C6H6(GT)', 'NOx(GT)', 'NO2(GT)'], axis=1)
+y = data_cleaned[['CO(GT)', 'NOx(GT)', 'NO2(GT)']]
+
+# Divide the data in training and test
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
 
-# Treinar modelo
+# Training the model
 model.fit(X_train, y_train)
 
 #
@@ -71,9 +90,7 @@ model.fit(X_train, y_train)
 #        more than 2 categories, then the output of the method will be a list of scores
 #        for each category.
 model_to_python = m2c.export_to_python(model)
-# Removendo importação do numpy
-# Remoção das importações e as conversões
-# Remove a importação do numpy
+#removing numpy dependencies
 model_to_python = model_to_python.replace("import numpy as np", "")
 model_to_python = model_to_python.replace("np.asarray(", "")
 model_to_python = model_to_python[:-1]
@@ -83,4 +100,3 @@ with open("model.py", "w") as text_file:
     print(f"{model_to_python}", file=text_file)
 
 print("Model exported successfully")
-
