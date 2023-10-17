@@ -1,4 +1,4 @@
-# Descentralized AQI Classifier
+# Decentralized AQI Classifier
 
 This project demonstrates how to implement a web application UI to interact with [airquality](../airquality/) DApp locally.
 It is a specific client for the Airquality application, and is intended to work using any of the `Airquality` projects as the back-end. It is an adapted version of frontend-echo project, using the same structure.
