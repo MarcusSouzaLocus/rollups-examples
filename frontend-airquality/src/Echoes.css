@@ -19,5 +19,5 @@
     border-radius: 5px;
     padding: 10px;
     margin: 10px 0;
-    background-color: #e2e8f0; /* Cor de fundo para cada echo */
+    background: linear-gradient(90deg, #182848, #050e1c); /* Cor de fundo para cada echo */
 }
