@@ -74,7 +74,7 @@ function RoarForm() {
             padding: "2rem",
             maxWidth: "600px",
             margin: "auto",
-            background: "linear-gradient(90deg, #4b6cb7, #182848)",  // Background em gradiente
+            background: "linear-gradient(90deg, #182848, #182848)",  // Background em gradiente
             borderRadius: "10px"
         }}>
             <h2 style={{
@@ -84,7 +84,7 @@ function RoarForm() {
                 fontSize: "1.5rem",
                 color: "white"
             }}>
-                Decentralized AQI Classifier
+                Polluant Values
             </h2>
             <form onSubmit={handleSubmit}>
                 <Flex direction="row" wrap="wrap" justify="space-between">
@@ -110,9 +110,10 @@ function RoarForm() {
                                 type="number"
                                 focusBorderColor="yellow"
                                 size="md"
+                                color="white"
                                 value={item.value}
                                 placeholder={item.placeholder}
-                                style={{ borderRadius: "5px", backgroundColor: "rgba(255,255,255,0.2)" }}
+                                style={{ borderRadius: "5px", backgroundColor: "rgba(0,0,0,0.2)" }}
                                 onChange={(e) => item.setter(e.target.value)}
                             />
                         </div>
