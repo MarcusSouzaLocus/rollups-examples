@@ -17,7 +17,7 @@ This example shows a simple way of leveraging some of the most widely used Machi
 The DApp generates a [linear regression](https://en.wikipedia.org/wiki/Logistic_regression) model using [scikit-learn](https://scikit-learn.org/), [NumPy](https://numpy.org/) and [pandas](https://pandas.pydata.org/), and then uses [m2cgen (Model to Code Generator)](https://github.com/BayesWitnesses/m2cgen) to transpile that model into native Python code with no dependencies.
 This approach is inspired by [Davis David's Machine Learning tutorial](https://www.freecodecamp.org/news/transform-machine-learning-models-into-native-code-with-zero-dependencies/), and is useful for a Cartesi DApp because it removes the need of porting all those Machine Learning libraries to the Cartesi Machine's RISC-V architecture, making the development process easier and the final back-end code simpler to execute.
 
-The practical goal of this application is to predict a classification based on the [Air Quality Dataset](https://www.kaggle.com/datasets/fedesoriano/air-quality-data-set/), which contains the responses of a gas multisensor device deployed on the field in an Italian city. Hourly responses averages are recorded along with gas concentrations references from a certified analyzer.
+The practical goal of this application is to predict a classification based on the [Air Quality Dataset](https://www.kaggle.com/datasets/fedesoriano/air-quality-data-set/), which contains the responses of a gas multisensor device deployed on the field in an Italian city. Hourly response averages are recorded along with gas concentration references from a certified analyzer.
 
 The model currently takes into account several variables for predicting the AQI(Air quality index):
 
@@ -27,7 +27,7 @@ The model currently takes into account several variables for predicting the AQI(
 
 3. PT08.S3(NOx): This represents the sensor response to Nitrogen Oxides (NOx) in the air. For instance, the value 1056 is the sensor reading, which can be correlated to the actual concentration of NOx in parts per billion (ppb).
 
-4. PT08.S4(NO2): This represents the sensor response to Nitrogen Dioxide (NO2) in the air. For instance , the value 1692 is the sensor reading, which can be correlated to the actual concentration of NO2 in micrograms per cubic meter (µg/m³).
+4. PT08.S4(NO2): This represents the sensor response to Nitrogen Dioxide (NO2) in the air. For instance, the value 1692 is the sensor reading, which can be correlated to the actual concentration of NO2 in micrograms per cubic meter (µg/m³).
 
 5. PT08.S5(O3): This represents the sensor response to Ozone (O3) in the air. For instance, the value 1268 is the sensor reading, which can be correlated to the actual concentration of O3 in micrograms per cubic meter (µg/m³).
 
@@ -35,7 +35,7 @@ The model currently takes into account several variables for predicting the AQI(
 
 7. RH: This represents the Relative Humidity in percentage. For instance, the value 13.6 is the measured relative humidity.
 
-8. AH: This represents the Absolute Humidity, which is the total water content in the air. For instance, the value 0.76 could be the absolute humidity in grams per cubic meter (g/m³).
+8. AH: This represents Absolute Humidity, which is the total water content in the air. For instance, the value 0.76 could be the absolute humidity in grams per cubic meter (g/m³).
 
 As such, inputs to the DApp should be given as a JSON string such as the following:
 
@@ -45,7 +45,10 @@ As such, inputs to the DApp should be given as a JSON string such as the followi
 
 ## Interacting with the application
 
-We can use the [frontend-console](../frontend-console) application to interact with the DApp.
+We have two main ways to interact with the dapp: using the [frontend-console](../frontend-console) application, or using the [frontend-airquality](../frontend-airquality). First, let's detail the frontend console.
+
+### Frontend-console
+
 Ensure that the [application has already been built](../frontend-console/README.md#building) before using it.
 
 First, go to a separate terminal window and switch to the `frontend-console` directory:
@@ -68,6 +71,14 @@ yarn start notice list
 
 The payload of the notice corresponds one of the list of the standard range for AQI: (`"Good"`),(`"Moderate"`),(`"Bad for sensible groups"`),(`"Bad"`),(`"Very Bad"`) and (`"Dangerous"`).
 In this case, it should be `"Moderate"`.
+
+
+### Frontend-airquality
+
+We can also interact with this DApp through a UI project [frontend-airquality](../frontend-airquality). Below we have a video showcase of the frontend interacting with the DApp for some input samples. Details on how to with this frontend project , please refer to frontend-airquality/README.md. 
+
+[AirqualityClassifier.webm](https://github.com/MarcusSouzaLocus/rollups-examples/assets/101931038/e3cd598e-ebbd-4027-a6e2-2811084fc8b2)
+
 
 ## Running the environment in host mode
 
