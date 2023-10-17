@@ -12,6 +12,12 @@ It is implemented as a regular ReactJS application, using [ethers](https://docs.
   <a href="">[![Static Badge](https://img.shields.io/badge/ethers-5.7-brown)](https://docs.ethers.io/v5/)</a>
 </div>
 
+
+
+[AirqualityClassifier.webm](https://github.com/MarcusSouzaLocus/rollups-examples/assets/101931038/441f8945-feab-4c73-a697-94a251f95061)
+
+
+
 It interacts with the DApp in two ways:
 
 - Sends inputs to the DApp ([`RoarForm` component](#send-an-input-the-roar-component))
