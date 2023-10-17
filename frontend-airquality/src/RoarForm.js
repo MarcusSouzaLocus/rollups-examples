@@ -25,7 +25,7 @@ function RoarForm() {
 
     function handleSubmit(event) {
         event.preventDefault();
-        const concatenatedString = `${co},${nmhc},${nox},${no2},${o3},${temperature},${humidity},${absoluteHumidity}`;
+        const concatenatedString = `{"PT08.S1(CO)": ${co}, "PT08.S2(NMHC)": ${nmhc}, "PT08.S3(NOx)": ${nox}, "PT08.S4(NO2)": ${no2}, "PT08.S5(O3)": ${o3}, "T": ${temperature}, "RH": ${humidity}, "AH": ${absoluteHumidity}}`;
         const sendInput = async () => {
             setLoading(true);
             const provider = new JsonRpcProvider(HARDHAT_LOCALHOST_RPC_URL);
