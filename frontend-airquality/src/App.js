@@ -26,7 +26,7 @@ function AppHeader() {
     return (
         <Box as="header" bg="linear-gradient(90deg, #182848, #182848)" p={6} shadow="md">
             <Heading as="h1" size="2xl" color="white" textAlign="center">
-                Descentralized AQI Classifier
+                Decentralized AQI Classifier
             </Heading>
         </Box>
     );
@@ -36,7 +36,7 @@ function AppFooter() {
     return (
         <Box as="footer" bg="gray.800" p={4} mt={6}>
             <Heading as="h6" size="sm" color="gray.300" textAlign="center">
-                All rights reserved - Marcus Souza - 2023
+                Marcus Souza - 2023 - https://www.linkedin.com/in/marcus-vini-souza/
             </Heading>
         </Box>
     );
