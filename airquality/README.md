@@ -1,6 +1,6 @@
 <div align="center">
-    <h1>Descentralized Air Quality Classifier</h1>
-    <i>A Decentralized Air Quality Predictor using sensor values for a list of polluants</i>
+    <h1>Decentralized Air Quality Classifier</h1>
+    <i>A Decentralized Air Quality Index Predictor using sensor values for a list of pollutants</i>
 </div>
 <div align="center">
   This repository contains an Machine Learning DApp developed using cartesi rollups.
