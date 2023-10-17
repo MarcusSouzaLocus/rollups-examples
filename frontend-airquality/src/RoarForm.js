@@ -82,7 +82,7 @@ function RoarForm() {
                 marginBottom: "1.5rem",
                 fontWeight: "bold",
                 fontSize: "1.5rem",
-                color: "white"  // Título em branco
+                color: "white"
             }}>
                 Decentralized AQI Classifier
             </h2>

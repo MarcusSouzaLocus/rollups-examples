@@ -1,0 +1,22 @@
+/* Echoes.css */
+.echoes-container {
+    background: linear-gradient(90deg, #182848, #050e1c); /* Cor de fundo semelhante à imagem do form */
+    border-radius: 10px;       /* Borda arredondada */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra suave */
+    padding: 20px;             /* Espaçamento interno */
+    margin: 20px 0;            /* Espaçamento externo */
+    font-size: 40px;
+    color: #e2e8f0;
+}
+
+.echoes-label {
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.echoes-list-item {
+    border-radius: 5px;
+    padding: 10px;
+    margin: 10px 0;
+    background-color: #e2e8f0; /* Cor de fundo para cada echo */
+}

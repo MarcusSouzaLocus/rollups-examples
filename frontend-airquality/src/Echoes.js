@@ -2,6 +2,7 @@ import { ethers } from "ethers";
 import { useQuery, gql } from "@apollo/client";
 import { useToast } from "@chakra-ui/react";
 import React, { useState, useEffect } from "react";
+import './Echoes.css'
 
 // GraphQL query to retrieve notices given a cursor
 const GET_NOTICES = gql`
@@ -79,7 +80,7 @@ function EchoesList() {
         console.log(`Detected new echo : ${echo}`);
 
         return (
-            <div key={`${node.input.index}-${node.index}`}>
+            <div className="echoes-list-item" key={`${node.input.index}-${node.index}`}>
                 <p>{echo}</p>
             </div>
         );
@@ -97,8 +98,8 @@ function EchoesList() {
 
 function Echoes() {
     return (
-        <div>
-            <label>
+        <div className="echoes-container">
+            <label className="echoes-label">
                 <p>Recent Results...</p>
             </label>
             <EchoesList />
